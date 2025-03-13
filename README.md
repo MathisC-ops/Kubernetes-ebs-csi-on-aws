@@ -31,7 +31,18 @@ storageClassName: $STORAGECLASS_NAME
 - You need to have install the EBS driver plugin before (AWS Add-ons | HELM)
 - Have Permissions to manage AWS CLI, IAM policy, EC2 ressources, Kubernetes resources
 
+## Command Sheet
 
+Some command to manage EBS and kubernetes resources.
 
+- **Kubernetes** :
+```shell
+kubectl describe pod $POD_NAME           #Check the description of the pod for see the pv, pvc mount
+kubectl exec -it ebs-test-pod -- df -h   #Check the mountpoint in the pod directly
+```
+- **AWS** :
+```shell
+aws ec2 describe-volumes --profile MY_PROFILE --region $MY_REGION
+```
 
 
