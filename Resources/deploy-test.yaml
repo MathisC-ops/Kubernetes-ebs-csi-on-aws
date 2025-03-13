@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ebs-test
+  labels:
+    app: ebs-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ebs-test
+  template:
+    metadata:
+      labels:
+        app: ebs-test
+    spec:
+      containers:
+      - name: ebs-test-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: ebs-storage
+          mountPath: "/my-test/"
+      volumes:
+      - name: ebs-storage
+        persistentVolumeClaim:
+          claimName: ebs-claim       #Change with your PVC name
